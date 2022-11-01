@@ -1,0 +1,53 @@
+23 - 32, 31 - 13, 12 - 21
+
+23 31 12
+
+<2022-11-01>
+
+# Unity life-cycle
+
+
+# Template # Generic
+@ private UnityEngine.Transform tr = null;
+@ private void Start()
+{
+	tr = this.GetComponent<UnityEngine.Transform>();
+	if(tr == null)
+	{
+	 UnityEngine.Debug.LogError("tr is null");
+	}
+}
+@ private void Update()
+{
+	tr.position = tr.position + (UnityEngine.Vector3.right * 2f * UnityEngine.Time.deltaTime);
+}
+
+
+
+# 벡터 덧셈
+
+# 벡터 뺄셈
+
+# 벡터 곱셈 / 나눗셈
+ㄴ # Scalar 곱 => Scalar곱된 벡터
+ㄴ # 벡터 내적(dot product) => 두 벡터간의 '각도'
+ㄴ # 벡터 외적(cross product) => 벡터들이 이루는 면에 수직한 벡터 (ex, '객체가 조명받는 양'구할 때 사용)
+       ㄴ cross product한 결과벡터와 광원을 내적하면 객체가 조명받는 양 구할 수 있음
+
+# 벡터 정규화
+: 벡터에서 벡터 길이를 나눠줌으로써 방향 벡터를 구하는 과정
+
+# 방향 벡터
+: 길이는 1이면서 방향만 가지는 벡터
+ex) tr.position = tr.position + (UnityEngine.Vector3.right * 2f * UnityEngine.Time.deltaTime);
+ㄴ UnityEngine.Vector3.right: (1, 0, 0) 
+ㄴ UnityEngine.Vector3.left: (-1, 0, 0)
+
+ㄴ UnityEngine.Vector3.forward : (0, 0, 1)
+ㄴ UnityEngine.Vector3.back : (0, 0, -1)
+
+ㄴ UnityEngine.Vector3.up : (0, 1, 0)
+ㄴ UnityEngine.Vector3.down : (0, -1, 0)
+
+#deltaTime 보정
+
