@@ -43,7 +43,7 @@ public class SecondTransform : MonoBehaviour
         float cosBeta = Mathf.Cos(-currentSec*6*Mathf.Deg2Rad);
         float sinBeta = Mathf.Sin(-currentSec*6*Mathf.Deg2Rad);
 
-        transform.position = (vX * (cosAlpha * cosBeta - sinAlpha * sinBeta) *10) + (vY * (sinAlpha * cosBeta + cosAlpha * sinBeta) * 10);
+        transform.position = (vX * (cosAlpha * cosBeta - sinAlpha * sinBeta) *22) + (vY * (sinAlpha * cosBeta + cosAlpha * sinBeta) * 22);
 
     }
 

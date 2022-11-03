@@ -33,6 +33,6 @@ public class MinuitTransform : MonoBehaviour
 
         float cosBeta = Mathf.Cos(-currentMin * 6 * Mathf.Deg2Rad);
         float sinBeta = Mathf.Sin(-currentMin * 6 * Mathf.Deg2Rad);
-        transform.position = (vX * (cosAlpha * cosBeta - sinAlpha * sinBeta) * 8) + (vY * (sinAlpha * cosBeta + cosAlpha * sinBeta) * 8);
+        transform.position = (vX * (cosAlpha * cosBeta - sinAlpha * sinBeta) * 20) + (vY * (sinAlpha * cosBeta + cosAlpha * sinBeta) *20);
     }
 }
