@@ -22,7 +22,7 @@ public class Moving : MonoBehaviour
             // Vector3는 절대위치기준 forward => 회전한 방향 상관없이 월드기준 앞 뒤(z축따라)로 움직이게 된다.
             // transform.forward하면 로컬기준 forward. => 회전한 방향으로 움직이게 된다.
             transform.position = transform.position + (transform.forward * movingSpeed * Time.deltaTime);
-
+            //transform.position = transform.position + (Vector3.forward * movingSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -55,6 +55,7 @@ public class Moving : MonoBehaviour
             transform.rotation = Quaternion.Euler(eulerAngle);
             // 쿼터니언은 +연산 안된다.
             //transform.rotation = transform.rotation + (Quaternion.Euler(0f, rotateSpeed*Time.deltaTime, 0f));
+            //transform.Rotate(Vector3.up, -rotateSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.E))
         {
