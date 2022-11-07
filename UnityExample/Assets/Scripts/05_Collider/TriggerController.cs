@@ -6,16 +6,21 @@ using UnityEngine;
 public class TriggerController : MonoBehaviour
 {
     [SerializeField] private bool useAuto = false;
+
     private float moveSpeed = 10f;
+
     private readonly float XMIN = -5f;
     private const float XMAX = 5f;
+
     private float t = 0f;
 
     private void InputProcess()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+            transform.Translate(
+                Vector3.left * moveSpeed * Time.deltaTime);
+
             if (transform.position.x < XMIN)
             {
                 Vector3 newPos = transform.position;
@@ -23,9 +28,12 @@ public class TriggerController : MonoBehaviour
                 transform.position = newPos;
             }
         }
+
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+            transform.Translate(
+                Vector3.right * moveSpeed * Time.deltaTime);
+
             if (transform.position.x > XMAX)
             {
                 Vector3 newPos = transform.position;
@@ -34,40 +42,42 @@ public class TriggerController : MonoBehaviour
             }
         }
     }
-    private void AutoMovingProcess()
+
+    private void AutoMoveProcess()
     {
         t += Time.deltaTime;
         if (t > 1f) t = 0f;
 
-        float lefpX = Mathf.Lerp(XMIN, XMAX, t);
+        float lerpX = Mathf.Lerp(XMIN, XMAX, t);
         Vector3 newPos = transform.position;
-        newPos.x = lefpX;
+        newPos.x = lerpX;
         transform.position = newPos;
     }
+
     private void Update()
     {
         if (!useAuto) InputProcess();
-        else AutoMovingProcess();
+        else AutoMoveProcess();
     }
 
-    // # 매개변수: collision means, 충돌 체가 들어온다. 
     //private void OnCollisionEnter(Collision _collision)
     //{
-    //    Debug.Log("Collision Enter: " + _collision.gameObject.name);
+    //    Debug.Log("Collision Enter: " +
+    //              _collision.gameObject.name);
     //}
 
-    // # collider가 들어온다. 충돌자체는 collision이 했지만 충돌체를 가진 내가 들어온다.
     private void OnTriggerEnter(Collider _other)
     {
         Debug.Log("Trigger Enter: " + _other.name);
     }
+
     private void OnTriggerStay(Collider _other)
     {
-        Debug.Log("Trigger Stay : " + _other.name);
+        Debug.Log("Trigger Stay: " + _other.name);
     }
+
     private void OnTriggerExit(Collider _other)
     {
         Debug.Log("Trigger Exit: " + _other.name);
     }
-
 }
