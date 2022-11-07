@@ -10,20 +10,18 @@ public class Moving : MonoBehaviour
     private void Update()
     {
         //MovingWithKey();
-        RotateWithKey();
         MovingWithAxis();
+        RotateWithKey();
     }
     private void MovingWithKey()
     {
-        if (Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.W))
         {
-            //transform.position = transform.position + (Vector3.forward * movingSpeed * Time.deltaTime);
             transform.position = transform.position + (transform.forward * movingSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.S))
         {
-            //transform.position = transform.position + (Vector3.back * movingSpeed * Time.deltaTime);
-            transform.position = transform.position + (-transform.forward * movingSpeed * Time.deltaTime);
+            transform.position = transform.position + (transform.forward * -1 * movingSpeed * Time.deltaTime);
         }
     }
     private void MovingWithAxis()
@@ -31,25 +29,21 @@ public class Moving : MonoBehaviour
         float axisV = Input.GetAxis("Vertical");
         float axisH = Input.GetAxis("Horizontal");
         float axisJ = Input.GetAxis("Jump");
-        Debug.Log("axisV : " + axisV);
-        Debug.Log("axisH : "+axisH);
-        Debug.Log("axisJ : " + axisJ);
+
         transform.Translate(Vector3.forward * axisV * movingSpeed * Time.deltaTime);
         transform.Translate(Vector3.right * axisH * movingSpeed * Time.deltaTime);
         transform.Translate(Vector3.up * axisJ * movingSpeed * Time.deltaTime);
     }
-
     private void RotateWithKey()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(KeyCode.Q))
         {
             //Vector3 eulerAngle = transform.rotation.eulerAngles;
             //eulerAngle.y -= rotateSpeed * Time.deltaTime;
             //transform.rotation = Quaternion.Euler(eulerAngle);
-            transform.Rotate(Vector3.up, -rotateSpeed * Time.deltaTime);
-
+            transform.Rotate(Vector3.up, -rotateSpeed*Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.E))
+        if(Input.GetKey(KeyCode.E))
         {
             //Vector3 eulerAngle = transform.rotation.eulerAngles;
             //eulerAngle.y += rotateSpeed * Time.deltaTime;
