@@ -40,6 +40,9 @@ public class Moving : MonoBehaviour
     private void MovingWithAxis()
     {
         float axisV = Input.GetAxis("Vertical");
+        float axisH = Input.GetAxis("Horizontal");
+        float axisJ = Input.GetAxis("Jump");
+
         //transform.position =
         //    transform.position +
         //    (transform.forward *
@@ -51,6 +54,9 @@ public class Moving : MonoBehaviour
             axisV *
             movingSpeed *
             Time.deltaTime);
+        transform.Translate(Vector3.right * axisH*movingSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * axisJ* movingSpeed * Time.deltaTime);
+        
     }
 
     private void RotateWithKey()

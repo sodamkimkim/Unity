@@ -8,7 +8,7 @@ public class Pyramid : MonoBehaviour
     private GameObject cubePrefab = null;
 
     //[SerializeField]
-    private int floor = 5;
+    private int floor = 3;
     private GameObject cube = null;
 
     private void Start()

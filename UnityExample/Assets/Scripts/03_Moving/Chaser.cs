@@ -5,6 +5,8 @@ using UnityEngine;
 public class Chaser : MonoBehaviour
 {
     private GameObject playerGO = null;
+
+    [SerializeField, Range(5f, 10f)]
     private float movingSpeed = 8f;
 
     private void Start()
