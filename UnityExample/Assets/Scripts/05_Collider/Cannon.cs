@@ -35,4 +35,8 @@ public class Cannon : MonoBehaviour
         }
     
     }
+    private void OnTriggerEnter(Collider _other)
+    {
+        Debug.Log("Collision : " + _other.name);
+    }
 }

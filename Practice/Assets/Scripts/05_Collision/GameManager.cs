@@ -11,14 +11,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        /*
-          # 코루틴 (Co-Routine)
-          - 정해진 시간마다 코인, 폭탄 랜덤위치에 만들기 위함.
-          - Thread로 Task-Manager만든 것. 
-
-         */
         StartCoroutine(SpawnCoroutine());
-
     }
     private Vector3 GetRndPos()
     {
@@ -31,8 +24,6 @@ public class GameManager : MonoBehaviour
             Instantiate(coinPrefab, GetRndPos(), Quaternion.identity);
             Instantiate(bombPrefab, GetRndPos(), Quaternion.identity);
 
-            // # WaitForSeconds
-            // Suspends the coroutine execution for the given amount of seconds using scaled time.
             yield return new WaitForSeconds(1f);
         }
     }
