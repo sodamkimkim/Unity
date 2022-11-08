@@ -16,7 +16,7 @@ public class Collector : MonoBehaviour
         if(_other.CompareTag("Coin"))
         {
             ++coinCnt;
-            //Debug.Log("Get Coin" + coinCnt);
+            Debug.Log("Get Coin" + coinCnt);
             countText.text = coinCnt.ToString();
 
             Destroy(_other.gameObject);
@@ -27,4 +27,5 @@ public class Collector : MonoBehaviour
             Destroy(_other.gameObject);
         }
     }
+    
 }
