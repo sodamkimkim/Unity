@@ -24,9 +24,7 @@ public class ComponentTest : MonoBehaviour
         {
             // # AddComponent vs GetComponent
             //Debug.LogError("Rigidbody is null!!"); // -> Rigidbody 있는 상태에서 gameObject.AddComponent<Rigidbody>();하면 null뜬다.
-            Capsule capsuleTest = GetComponentInChildren<Capsule>();
-            
-                //GetComponent<Rigidbody>(); // Rigidbody가 이미 추가되어 있으면 그냥 GetComponent하면 됨.
+           GetComponent<Rigidbody>(); // Rigidbody가 이미 추가되어 있으면 그냥 GetComponent하면 됨.
         }
         // # GetComponentsInChildren
         // 나를 포함한 자식들이 가지고 있는 Transform컴포넌트들을 갖고와라
@@ -51,6 +49,8 @@ public class ComponentTest : MonoBehaviour
         // # Destroy(Component) vs Destory(Component.gameObject)
         //ㄴ Component넣으면 gameObject가 아니고 component를 넣고 Destroy하면 컴포넌트가 없어진다.
         //Destroy(capsule);
+
+        
 
 
 
