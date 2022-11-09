@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class Moving : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject gameOverTextGo = null;
+    private bool isGameOver = false;
+
     private float movingSpeed = 10f;
     private float rotateSpeed = 100f;
+    private Rigidbody rb = null;
 
+    private void Awake()
+    {
+        // 시작하기 전부터 rigidbody 가지고 있도록 Awake에다가 넣어준다.
+        rb = GetComponent<Rigidbody>();
+    }
     private void Update()
     {
-        //MovingWithKey();
-        MovingWithAxis();
+        if (isGameOver) return;
 
+        //MovingWithKey();
+        //MovingWithAxis();
+        MovingWithVelocity();
         RotateWithKey();
     }
 
@@ -54,11 +66,22 @@ public class Moving : MonoBehaviour
             axisV *
             movingSpeed *
             Time.deltaTime);
-        transform.Translate(Vector3.right * axisH*movingSpeed * Time.deltaTime);
-        transform.Translate(Vector3.up * axisJ* movingSpeed * Time.deltaTime);
-        
+        transform.Translate(Vector3.right * axisH * movingSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * axisJ * movingSpeed * Time.deltaTime);
+
     }
 
+    //벽 뚫고 지나가는 문제 - rigidbody, velocity사용. 초당 물리프레임(50fps)이랑 속도 맞춰줌
+    private void MovingWithVelocity()
+    {
+        // velocity쓰려면 무조건 rigidbody있어야 한다.
+        float axisV = Input.GetAxis("Vertical");
+        float axisH = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector3(axisH * movingSpeed, 0f, axisV * movingSpeed);
+
+        //transform.forward * axisV *movingSpeed;
+        //rb.velocity = transform.forward * axisH * movingSpeed;
+    }
     private void RotateWithKey()
     {
         if (Input.GetKey(KeyCode.Q))
@@ -85,6 +108,14 @@ public class Moving : MonoBehaviour
             transform.Rotate(
                 Vector3.up,
                 rotateSpeed * Time.deltaTime);
+        }
+    }
+    private void OnTriggerEnter(Collider _other)
+    {
+        if (_other.CompareTag("Bomb") || _other.CompareTag("Chaser"))
+        {
+            isGameOver = true;
+            gameOverTextGo.SetActive(true);
         }
     }
 } // class Moving

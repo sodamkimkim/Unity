@@ -24,7 +24,7 @@ public class Collector : MonoBehaviour
         else if(_other.tag == "Bomb")
         {
             Debug.Log("Booooom!!!");
-            Destroy(_other.gameObject);
+
         }
     }
     
