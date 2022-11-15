@@ -77,10 +77,13 @@ public class Moving : MonoBehaviour
         // velocity쓰려면 무조건 rigidbody있어야 한다.
         float axisV = Input.GetAxis("Vertical");
         float axisH = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(axisH * movingSpeed, 0f, axisV * movingSpeed);
-
-        //transform.forward * axisV *movingSpeed;
+        //rb.velocity = new Vector3(axisH * movingSpeed, 0f, axisV * movingSpeed);
         //rb.velocity = transform.forward * axisH * movingSpeed;
+
+        Vector3 dirV = transform.forward * axisV;
+        Vector3 dirH = transform.right * axisH;
+        Vector3 dir = (dirV + dirH).normalized;
+        rb.velocity = dir * movingSpeed;
     }
     private void RotateWithKey()
     {
@@ -110,12 +113,12 @@ public class Moving : MonoBehaviour
                 rotateSpeed * Time.deltaTime);
         }
     }
-    private void OnTriggerEnter(Collider _other)
-    {
-        if (_other.CompareTag("Bomb") || _other.CompareTag("Chaser"))
-        {
-            isGameOver = true;
-            gameOverTextGo.SetActive(true);
-        }
-    }
+    //private void OnTriggerEnter(Collider _other)
+    //{
+    //    if (_other.CompareTag("Bomb") || _other.CompareTag("Chaser"))
+    //    {
+    //        isGameOver = true;
+    //        gameOverTextGo.SetActive(true);
+    //    }
+    //}
 } // class Moving
