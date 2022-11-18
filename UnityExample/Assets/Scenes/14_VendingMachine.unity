@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: beverages.Array.data[2].type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2339488534750507215, guid: 701827b93f939c84db15759ea37ec5f4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4eb9bfe694e59ac4c8efb3cd7e5efca9, type: 2}
     - target: {fileID: 7297501043977690393, guid: 701827b93f939c84db15759ea37ec5f4, type: 3}
       propertyPath: m_RootOrder
       value: 1

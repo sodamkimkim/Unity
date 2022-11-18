@@ -25,6 +25,7 @@ public class AdPanel : MonoBehaviour
     {
         if (adImgs == null || adImgs.Length == 0)
             return;
+        mr.material = Resources.Load<Material>("Materials\\M_AdPanel_W");
         StartCoroutine(ChangeImageCoroutine());
     }
     private IEnumerator ChangeImageCoroutine()
@@ -37,7 +38,7 @@ public class AdPanel : MonoBehaviour
                 mr.material.mainTexture = adImgs[idx];
                 ++idx;
                 if (idx >= adImgs.Length) idx = 0;
-                idx %= adImgs.Length;
+                //idx %= adImgs.Length;
             }
             else
             {

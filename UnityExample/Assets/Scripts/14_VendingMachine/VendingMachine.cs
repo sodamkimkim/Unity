@@ -6,6 +6,7 @@ public class VendingMachine : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject[] beveragePrefabs = null;
+    
     public enum EBeverageType { Cider, Coke, StrawberryMilk }
 
     
