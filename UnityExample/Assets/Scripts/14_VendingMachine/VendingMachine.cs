@@ -6,12 +6,12 @@ public class VendingMachine : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject[] beveragePrefabs = null;
-    
+
     public enum EBeverageType { Cider, Coke, StrawberryMilk }
 
-    
+
     [System.Serializable]
-    public struct SBeverage
+    public struct SButton
     {
         public EBeverageType type;
         public int cnt;
@@ -22,10 +22,10 @@ public class VendingMachine : MonoBehaviour
     //[SerializeField]
     //private int[] beverageCnts = null;
     [SerializeField]
-    private SBeverage[] beverages = null;
+    private SButton[] buttons = null;
 
     private GameObject[] beveragePrefabs = null;
-        //private GameObject beveragePrefab = null;
+    //private GameObject beveragePrefab = null;
     private void Awake()
     {
         // 폴더 다 들고옴
@@ -37,16 +37,22 @@ public class VendingMachine : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SpawnBeverage(EBeverageType.Cider);
+            if (BuyBeverageWithButtonIndex(0))
+                SpawnBeverage(buttons[0].type);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            SpawnBeverage(EBeverageType.Coke);
+        {
+            if (BuyBeverageWithButtonIndex(1))
+                SpawnBeverage(buttons[1].type);
+        }
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            SpawnBeverage(EBeverageType.StrawberryMilk);
+        {
+            if(BuyBeverageWithButtonIndex(2))
+            SpawnBeverage(buttons[2].type);
+        }
     }
-
     // 음료생성해주는 메서드
     public void SpawnBeverage(EBeverageType _type)
     {
@@ -54,7 +60,7 @@ public class VendingMachine : MonoBehaviour
         // c에서는 그냥 int 면 int로 들어오는데..
         GameObject go = Instantiate(beveragePrefabs[(int)_type]);
         go.transform.position = transform.position + GetRandomPositionWithRadius(2.5f);
-      
+
     }
     // 반지름 받아서 랜덤포지션 생성해주는 함수
     private Vector3 GetRandomPositionWithRadius(float _r)
@@ -71,7 +77,16 @@ public class VendingMachine : MonoBehaviour
 
         // 2. 음료 구매하고나면 음료 카운트 -1
 
-       int stock = 0;
-    return stock;
+        return 0;
+    }
+    public int CheckStock(int _btnIdx)
+    {
+        return buttons[_btnIdx].cnt;
+    }
+    public bool BuyBeverageWithButtonIndex(int _btnIdx)
+    {
+        if (CheckStock(_btnIdx) == 0) return false;
+        --buttons[_btnIdx].cnt;
+        return true;
     }
 } // end of class
