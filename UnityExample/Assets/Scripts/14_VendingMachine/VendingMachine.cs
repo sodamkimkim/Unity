@@ -53,6 +53,12 @@ public class VendingMachine : MonoBehaviour
             SpawnBeverage(buttons[2].type);
         }
     }
+    public bool BuyBeverageWithButtonIndex(int _btnIdx)
+    {
+        if (CheckStock(_btnIdx) == 0) return false;
+        --buttons[_btnIdx].cnt;
+        return true;
+    }
     // 음료생성해주는 메서드
     public void SpawnBeverage(EBeverageType _type)
     {
@@ -82,11 +88,5 @@ public class VendingMachine : MonoBehaviour
     public int CheckStock(int _btnIdx)
     {
         return buttons[_btnIdx].cnt;
-    }
-    public bool BuyBeverageWithButtonIndex(int _btnIdx)
-    {
-        if (CheckStock(_btnIdx) == 0) return false;
-        --buttons[_btnIdx].cnt;
-        return true;
     }
 } // end of class
