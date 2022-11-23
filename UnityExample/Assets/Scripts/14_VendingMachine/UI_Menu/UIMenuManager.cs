@@ -15,10 +15,11 @@ public class UIMenuManager : MonoBehaviour
         btnHolder = GetComponentInChildren<UIMenuButtonHolder>();
     }
     public void Init(
-        VendingMachine.SButton[] _btnInfos, int _btnColCnt)
+        // 배열은 참조이기 때문에 여기는 ref 안해도 된다.
+        VendingMachine.SButton[] _btnInfos, UIMenuButton.OnClickDelegate _onClickCallback,int _btnColCnt)
     {
         btnHolder.BuildButtons(
-            _btnInfos, _btnColCnt, backPanelTr.sizeDelta
+            _btnInfos, _onClickCallback, _btnColCnt, backPanelTr.sizeDelta
             );
     }
 }

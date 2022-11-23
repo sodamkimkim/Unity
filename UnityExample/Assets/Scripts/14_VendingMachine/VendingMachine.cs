@@ -15,7 +15,14 @@ public class VendingMachine : MonoBehaviour
     {
         public EBeverageType type;
         public int price;
-        public int cnt;
+        public int stock;
+
+        public SButton(EBeverageType _type, int _price, int _stock)
+        {
+            type = _type;
+            price = _price;
+            stock = _stock;
+        }
     }
     //[SerializeField]
     //private EBeverageType[] beverages = null;
@@ -62,19 +69,14 @@ public class VendingMachine : MonoBehaviour
         //    if (BuyBeverageWithButtonIndex(2))
         //        SpawnBeverage(buttons[2].type);
         //}
+        // 버튼정보 넣어서 ui매니저 호출
         if (Input.GetKeyDown(KeyCode.M))
-            uiMng.ShowMenu(buttons, btnColCnt);
+            uiMng.ShowMenu(buttons, SpawnBeverage, btnColCnt); // 콜백될 실제 함수 들어감
         if (Input.GetKeyDown(KeyCode.N))
             uiMng.HideMenu();
     }
-    public bool BuyBeverageWithButtonIndex(int _btnIdx)
-    {
-        if (CheckStock(_btnIdx) == 0) return false;
-        --buttons[_btnIdx].cnt;
-        return true;
-    }
     // 음료생성해주는 메서드
-    public void SpawnBeverage(EBeverageType _type)
+    private void SpawnBeverage(EBeverageType _type)
     {
         // c#에서는 enum도 클래스이기 떄문에 int로 형변환 해줘야 한다.
         // c에서는 그냥 int 면 int로 들어오는데..
@@ -88,6 +90,7 @@ public class VendingMachine : MonoBehaviour
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * _r;
     }
+    // 타입받아서 재고 체크
     public int CheckStock(EBeverageType _type)
     {
         // ******** 과제
@@ -99,8 +102,24 @@ public class VendingMachine : MonoBehaviour
 
         return 0;
     }
+    // 버튼인덱스 받아서 재고 체크
     public int CheckStock(int _btnIdx)
     {
-        return buttons[_btnIdx].cnt;
+        return buttons[_btnIdx].stock;
+    }
+    // 버튼 인덱스 받아서 음료 구매 (재고 --)하는 메서드
+    private bool BuyBeverageWithButtonIndex(int _btnIdx)
+    {
+        if (CheckStock(_btnIdx) == 0) return false;
+        --buttons[_btnIdx].stock;
+        
+        return true;
+    }
+    public void BuyBeverage(int _btnIdx)
+    {
+        if (buttons == null || buttons.Length == 0 || buttons.Length <= _btnIdx) return;
+
+        if (BuyBeverageWithButtonIndex(_btnIdx))
+            SpawnBeverage(buttons[_btnIdx].type);
     }
 } // end of class

@@ -12,9 +12,9 @@ public class UIManager : MonoBehaviour
         HideMenu();
     }
     public void ShowMenu(
-        VendingMachine.SButton[] _btnInfos, int _btnColCnt)
+        VendingMachine.SButton[] _btnInfos, UIMenuButton.OnClickDelegate _onClickCallback, int _btnColCnt)
     {
-        menuMng.Init(_btnInfos, _btnColCnt);
+        menuMng.Init(_btnInfos, _onClickCallback, _btnColCnt);
         menuMng.gameObject.SetActive(true);
     }
     public void HideMenu()

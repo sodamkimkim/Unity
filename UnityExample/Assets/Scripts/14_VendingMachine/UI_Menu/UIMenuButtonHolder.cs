@@ -24,38 +24,42 @@ public class UIMenuButtonHolder : MonoBehaviour
     //    }
     //}
 
+    #region Test Functions
+    //public void CreateMenuButton(
+    //   VendingMachine.EBeverageType _type, int _price, int _stock, UIMenuButton.OnClickDelegate _onClickCallback, Vector3 _pos)
+    //{
+    //    // 예외처리
+    //    if (menuBtnPrefab == null) { Debug.Log("menuBtnPrefab을 넣어주세요"); return; }
 
-    public void CreateMenuButton(
-        string _name, int _price, int _stock, Vector3 _pos)
-    {
-        // 예외처리
-        if (menuBtnPrefab == null) { Debug.Log("menuBtnPrefab을 넣어주세요"); return; }
+    //    GameObject go = Instantiate(menuBtnPrefab);
+    //    //부모가 될 트렌스폼을 넣어서 canvas아래에 ui가 들어가게끔 해 줘야 한다.
+    //    // go.transform.parent = transform;
+    //    go.transform.SetParent(transform);
+    //    // 만들어지는 버튼은 부모를 기준으로 상대좌표로 지정해줘야함
+    //    go.GetComponent<RectTransform>().localPosition = _pos;
 
-        GameObject go = Instantiate(menuBtnPrefab);
-        //부모가 될 트렌스폼을 넣어서 canvas아래에 ui가 들어가게끔 해 줘야 한다.
-        // go.transform.parent = transform;
-        go.transform.SetParent(transform);
-        // 만들어지는 버튼은 부모를 기준으로 상대좌표로 지정해줘야함
-        go.GetComponent<RectTransform>().localPosition = _pos;
+    //    go.GetComponent<UIMenuButton>().UpdateInfo(_type, _price, _stock, _onClickCallback );
+    //}
+    //private void BuildTestButtons()
+    //{
 
-        go.GetComponent<UIMenuButton>().UpdateInfo(_name, _price, _stock);
-    }
-    private void BuildTestButtons()
-    {
+    //    //if (btnTotalCnt % btnColCnt > 0)
+    //    //    lineCnt += 1;
+    //    int lineCnt = btnTotalCnt / btnColCnt;
+    //    lineCnt += btnTotalCnt % btnColCnt > 0 ? 1 : 0;
 
-        //if (btnTotalCnt % btnColCnt > 0)
-        //    lineCnt += 1;
-        int lineCnt = btnTotalCnt / btnColCnt;
-        lineCnt += btnTotalCnt % btnColCnt > 0 ? 1 : 0;
+    //    Vector3 startPos = new Vector3(-((hOffset * (btnColCnt - 1)) * 0.5f), ((vOffset - 1) * lineCnt) * 0.5f, 0f);
+    //    for (int i = 0; i < btnTotalCnt; ++i)
+    //    {
+    //        Vector3 pos = startPos + new Vector3(hOffset * (i % btnColCnt), -vOffset * (i / btnColCnt), 0f);
+    //        CreateMenuButton(VendingMachine.EBeverageType.Cider, 1000, 5, null,pos);
+    //    }
+    //}
+    #endregion
 
-        Vector3 startPos = new Vector3(-((hOffset * (btnColCnt - 1)) * 0.5f), ((vOffset - 1) * lineCnt) * 0.5f, 0f);
-        for (int i = 0; i < btnTotalCnt; ++i)
-        {
-            Vector3 pos = startPos + new Vector3(hOffset * (i % btnColCnt), -vOffset * (i / btnColCnt), 0f);
-            CreateMenuButton("테스트", 1000, 5, pos);
-        }
-    }
-    public void BuildButtons(VendingMachine.SButton[] _btnInfos, int _btnColCnt, Vector2 _backPanelSize)
+    public void BuildButtons(VendingMachine.SButton[] _btnInfos, 
+        UIMenuButton.OnClickDelegate _onClickCallback,
+        int _btnColCnt, Vector2 _backPanelSize)
     {
         btnTotalCnt = _btnInfos.Length;
         btnColCnt = _btnColCnt;
@@ -92,7 +96,7 @@ public class UIMenuButtonHolder : MonoBehaviour
                 startPosX + (horizontalOffset * (i % btnColCnt)),
                 startPosY - (verticalOffset * (i / btnColCnt)));
             btn.SetSize(btnWidth, btnHeight);
-            btn.UpdateInfo(_btnInfos[i]);
+            btn.UpdateInfo(ref _btnInfos[i], _onClickCallback);
         }
     }
 }

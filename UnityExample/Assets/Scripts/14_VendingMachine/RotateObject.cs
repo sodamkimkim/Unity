@@ -28,16 +28,14 @@ public class RotateObject : MonoBehaviour
     private void AutoMovingProcess()
     {
         curruntPosition += Time.deltaTime * direction;
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
         if(curruntPosition >=YMAX)
         {
-            Debug.Log("curruntPosition >= 2f");
             direction *= -1;
             curruntPosition = YMAX;
      
         }else if(curruntPosition <=YMIN)
         {
-            Debug.Log("curruntPosition <= -1");
             direction *= -1;
             curruntPosition = YMIN;
         }
