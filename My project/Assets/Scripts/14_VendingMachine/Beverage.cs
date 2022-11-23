@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Beverage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected string beverageName = null;
+    protected string info = null;
+    protected int price = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -14,6 +14,7 @@ public class VendingMachine : MonoBehaviour
     public struct SButton
     {
         public EBeverageType type;
+        public int price;
         public int cnt;
     }
     //[SerializeField]
@@ -23,35 +24,48 @@ public class VendingMachine : MonoBehaviour
     //private int[] beverageCnts = null;
     [SerializeField]
     private SButton[] buttons = null;
+    [SerializeField]
+    private int btnColCnt = 1;
 
     private GameObject[] beveragePrefabs = null;
-    //private GameObject beveragePrefab = null;
+    private UIManager uiMng = null;
+
     private void Awake()
     {
         // 폴더 다 들고옴
         // 파일 순서대로 배열인덱스 매겨지기 때문에 이넘도 그렇게 셋팅하는게 편하다.
+
+        // 1. Find tag
+        // 2. Inspector
+        // 3. GetComponentInChildren
         beveragePrefabs = Resources.LoadAll<GameObject>("Prefabs\\Beverages");
         //beveragePrefab = Resources.Load<GameObject>("Prefabs\\Beverages\\P_Beverage_Coke");
-
+        GameObject uiMngGo = GameObject.FindGameObjectWithTag("UIManager");
+        if (uiMngGo != null)
+            uiMng = uiMngGo.GetComponent<UIManager>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (BuyBeverageWithButtonIndex(0))
-                SpawnBeverage(buttons[0].type);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (BuyBeverageWithButtonIndex(1))
-                SpawnBeverage(buttons[1].type);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if(BuyBeverageWithButtonIndex(2))
-            SpawnBeverage(buttons[2].type);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    if (BuyBeverageWithButtonIndex(0))
+        //        SpawnBeverage(buttons[0].type);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    if (BuyBeverageWithButtonIndex(1))
+        //        SpawnBeverage(buttons[1].type);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    if (BuyBeverageWithButtonIndex(2))
+        //        SpawnBeverage(buttons[2].type);
+        //}
+        if (Input.GetKeyDown(KeyCode.M))
+            uiMng.ShowMenu(buttons, btnColCnt);
+        if (Input.GetKeyDown(KeyCode.N))
+            uiMng.HideMenu();
     }
     public bool BuyBeverageWithButtonIndex(int _btnIdx)
     {
