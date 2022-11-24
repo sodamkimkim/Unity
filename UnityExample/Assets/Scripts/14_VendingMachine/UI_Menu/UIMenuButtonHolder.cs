@@ -6,56 +6,15 @@ public class UIMenuButtonHolder : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuBtnPrefab = null;
-
     private readonly float hOffset = 80f;
     private readonly float vOffset = 80f;
 
-    private int btnTotalCnt = 10;
-    private int btnColCnt = 4;
+    private int btnTotalCnt = 0;
+    private int btnColCnt = 0;
 
-    //private void Update()
-    //{
-    //    // 우리는 지금 월드좌표가 아니라 부모기준 상대위치이기 때문에 간격만 계산하면된다. 월드위치라면 부모위치  + 변화량 해줘야 하는 거임
-    //    if (Input.GetKeyDown(KeyCode.B))
-    //    {
-    //        // TODO
-    //        // test
+    private List<GameObject> btnList = new List<GameObject>();
 
-    //    }
-    //}
-
-
-    public void CreateMenuButton(
-        string _name, int _price, int _stock, Vector3 _pos)
-    {
-        // 예외처리
-        if (menuBtnPrefab == null) { Debug.Log("menuBtnPrefab을 넣어주세요"); return; }
-
-        GameObject go = Instantiate(menuBtnPrefab);
-        //부모가 될 트렌스폼을 넣어서 canvas아래에 ui가 들어가게끔 해 줘야 한다.
-        // go.transform.parent = transform;
-        go.transform.SetParent(transform);
-        // 만들어지는 버튼은 부모를 기준으로 상대좌표로 지정해줘야함
-        go.GetComponent<RectTransform>().localPosition = _pos;
-
-        go.GetComponent<UIMenuButton>().UpdateInfo(_name, _price, _stock);
-    }
-    private void BuildTestButtons()
-    {
-
-        //if (btnTotalCnt % btnColCnt > 0)
-        //    lineCnt += 1;
-        int lineCnt = btnTotalCnt / btnColCnt;
-        lineCnt += btnTotalCnt % btnColCnt > 0 ? 1 : 0;
-
-        Vector3 startPos = new Vector3(-((hOffset * (btnColCnt - 1)) * 0.5f), ((vOffset - 1) * lineCnt) * 0.5f, 0f);
-        for (int i = 0; i < btnTotalCnt; ++i)
-        {
-            Vector3 pos = startPos + new Vector3(hOffset * (i % btnColCnt), -vOffset * (i / btnColCnt), 0f);
-            CreateMenuButton("테스트", 1000, 5, pos);
-        }
-    }
-    public void BuildButtons(VendingMachine.SButton[] _btnInfos, int _btnColCnt, Vector2 _backPanelSize)
+    public void BuildButtons(VendingMachine.SButton[] _btnInfos, UIMenuButton.OnClickDelegate _onClickCallback, int _btnColCnt, Vector2 _backPanelSize)
     {
         btnTotalCnt = _btnInfos.Length;
         btnColCnt = _btnColCnt;
@@ -67,6 +26,7 @@ public class UIMenuButtonHolder : MonoBehaviour
         // 가로 간격 구하기
         float backPanelWidth = _backPanelSize.x;
         float backPanelHeight = _backPanelSize.y;
+
         float horizontalOffset = backPanelWidth / btnColCnt;
         float horizontalOffsetHalf = horizontalOffset * 0.5f;
 
@@ -74,25 +34,44 @@ public class UIMenuButtonHolder : MonoBehaviour
         lineCnt += (btnTotalCnt % btnColCnt) > 0 ? 1 : 0;
 
         float verticalOffset = backPanelHeight / lineCnt;
-        float verticalOffsetHalf = verticalOffset * 0.5f;
+        float verticOffsetHalf = verticalOffset * 0.5f;
 
         float btnWidth = horizontalOffset * 0.9f;
         float btnHeight = verticalOffset * 0.9f;
 
         float startPosX = (backPanelWidth * 0.5f * -1f) + horizontalOffsetHalf;
-        float startPosY = (backPanelHeight * 0.5f) - verticalOffsetHalf;
+        float startPosY = (backPanelHeight * 0.5f) - verticOffsetHalf;
 
-        for (int i = 0; i < btnTotalCnt; ++i)
+        // 메뉴 버튼 생성하기 전 destroy()
+        DestroyButtons();
+
+        // 포문돌려 버튼 생성
+        for (int i = 0; i < btnTotalCnt; i++)
         {
             GameObject btnGo = Instantiate(menuBtnPrefab);
+            // 생성된 btnGo를 UIMenuButtonHolder아래로 넣어주는 코드ㄱ
             btnGo.transform.SetParent(transform);
+            // 생성한 버튼마다의 Script인 UIMenuButton을 불러와서 위치와 사이즈 지정
             UIMenuButton btn = btnGo.GetComponent<UIMenuButton>();
-            //btnGo.GetComponent<RectTransform>().localPosition = new Vector3(startPosX + (horizontalOffset * (i % btnColCnt)), startPosY + (verticalOffset * (i / btnColCnt)), 0f);
+            // SetLocalPosition에 z는 = 0f로 default 값 정해져 있어서 안넣어도 된다.
             btn.SetLocalPosition(
                 startPosX + (horizontalOffset * (i % btnColCnt)),
-                startPosY - (verticalOffset * (i / btnColCnt)));
+                startPosY - (verticalOffset * (i / btnColCnt))
+                );
             btn.SetSize(btnWidth, btnHeight);
-            btn.UpdateInfo(_btnInfos[i]);
+            // i순서대로 버튼 생성할 때, i가 다른 클래스에서 btnIdx로 활용되게 된다.
+            btn.Init(i, _btnInfos[i], _onClickCallback);
+
+            // 리스트에 게임 오브젝트 추가
+            btnList.Add(btnGo);
         }
+
     }
-}
+    private void DestroyButtons()
+    {
+        if (btnList == null) return;
+        foreach (GameObject btnGo in btnList)
+            Destroy(btnGo); // node내부 GameObject 정리
+        btnList.Clear(); // node 메모리 정리
+    }
+} // end of class
