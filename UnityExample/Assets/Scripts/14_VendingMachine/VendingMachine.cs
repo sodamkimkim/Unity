@@ -6,10 +6,7 @@ public class VendingMachine : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject[] beveragePrefabs = null;
-
     public enum EBeverageType { Cider, Coke, StrawberryMilk }
-
-
     [System.Serializable]
     public struct SButton
     {
@@ -69,11 +66,13 @@ public class VendingMachine : MonoBehaviour
         //    if (BuyBeverageWithButtonIndex(2))
         //        SpawnBeverage(buttons[2].type);
         //}
+        #region 메뉴버튼
         // 버튼정보 넣어서 ui매니저 호출
-        if (Input.GetKeyDown(KeyCode.M))
-            uiMng.ShowMenu(buttons, SpawnBeverage, btnColCnt); // 콜백될 실제 함수 들어감
-        if (Input.GetKeyDown(KeyCode.N))
-            uiMng.HideMenu();
+        //if (Input.GetKeyDown(KeyCode.M))
+        //    uiMng.ShowMenu(buttons, BuyBeverage, btnColCnt); // 콜백될 실제 함수 들어감
+        //if (Input.GetKeyDown(KeyCode.N))
+        //    uiMng.HideMenu();
+        #endregion
     }
     // 음료생성해주는 메서드
     private void SpawnBeverage(EBeverageType _type)
@@ -112,14 +111,35 @@ public class VendingMachine : MonoBehaviour
     {
         if (CheckStock(_btnIdx) == 0) return false;
         --buttons[_btnIdx].stock;
-        
+
         return true;
     }
-    public void BuyBeverage(int _btnIdx)
+    public bool BuyBeverage(int _btnIdx, out SButton _newBtnInfo)
     {
-        if (buttons == null || buttons.Length == 0 || buttons.Length <= _btnIdx) return;
+        if (buttons == null || buttons.Length == 0 || buttons.Length <= _btnIdx)
+        {
+            _newBtnInfo = buttons[_btnIdx];
+            return false;
+        }
 
         if (BuyBeverageWithButtonIndex(_btnIdx))
+        {
             SpawnBeverage(buttons[_btnIdx].type);
+            _newBtnInfo = buttons[_btnIdx];
+            return true;
+        };
+        _newBtnInfo = buttons[_btnIdx];
+        return false;
+    }
+    // 플레이어와 상호작용
+    public void ShowMenu()
+    {
+        uiMng.ShowMenu(
+            buttons, BuyBeverage, btnColCnt);
+    }
+    // 플레이어와 상호작용
+    public void HideMenu()
+    {
+        uiMng.HideMenu();
     }
 } // end of class

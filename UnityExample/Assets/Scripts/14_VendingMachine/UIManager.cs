@@ -21,4 +21,4 @@ public class UIManager : MonoBehaviour
     {
         menuMng.gameObject.SetActive(false);
     }
-}
+} // end of class

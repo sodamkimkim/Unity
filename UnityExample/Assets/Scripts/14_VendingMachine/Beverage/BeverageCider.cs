@@ -13,6 +13,6 @@ public class BeverageCider : Beverage
 
     public override void Drink()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("»çÀÌ´Ù ²Ü²©²Ü²©²Ü²Ú");
     }
 }

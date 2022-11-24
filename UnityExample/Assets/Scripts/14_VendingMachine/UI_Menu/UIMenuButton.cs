@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class UIMenuButton : MonoBehaviour
 {
     // delegate는 외부접근 해야해서 public 
-    public delegate void OnClickDelegate(int _btnIdx);
+    public delegate bool OnClickDelegate(int _btnIdx, out VendingMachine.SButton _btnInfo);
     // 람다 안쓸 때 필요한 delegate함수타입 변수
     private OnClickDelegate onClickCallback = null;
 
@@ -51,7 +51,13 @@ public class UIMenuButton : MonoBehaviour
 
     public void OnClickCallback()
     {
-        onClickCallback?.Invoke(btnIdx);
+        VendingMachine.SButton newBtnInfo = new VendingMachine.SButton();
+        if ((bool)onClickCallback?.Invoke(btnIdx, out newBtnInfo ))
+        {
+            // 구매가 됨
+            UpdateInfo(newBtnInfo);
+        }
+        
     }
     /*
      이 스크립트 가 붙는 프리팹은 버튼이라는 ui요소이다.

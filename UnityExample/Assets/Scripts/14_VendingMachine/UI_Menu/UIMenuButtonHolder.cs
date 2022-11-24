@@ -13,6 +13,7 @@ public class UIMenuButtonHolder : MonoBehaviour
     private int btnTotalCnt = 10;
     private int btnColCnt = 4;
 
+    private List<GameObject> btnList = new List<GameObject>();
     //private void Update()
     //{
     //    // 우리는 지금 월드좌표가 아니라 부모기준 상대위치이기 때문에 간격만 계산하면된다. 월드위치라면 부모위치  + 변화량 해줘야 하는 거임
@@ -57,10 +58,12 @@ public class UIMenuButtonHolder : MonoBehaviour
     //}
     #endregion
 
-    public void BuildButtons(VendingMachine.SButton[] _btnInfos, 
+    public void BuildButtons(VendingMachine.SButton[] _btnInfos,
         UIMenuButton.OnClickDelegate _onClickCallback,
         int _btnColCnt, Vector2 _backPanelSize)
     {
+    
+
         btnTotalCnt = _btnInfos.Length;
         btnColCnt = _btnColCnt;
         if (btnTotalCnt <= 0) btnTotalCnt = 1;
@@ -86,6 +89,7 @@ public class UIMenuButtonHolder : MonoBehaviour
         float startPosX = (backPanelWidth * 0.5f * -1f) + horizontalOffsetHalf;
         float startPosY = (backPanelHeight * 0.5f) - verticalOffsetHalf;
 
+        DestroyButtons();
         for (int i = 0; i < btnTotalCnt; ++i)
         {
             GameObject btnGo = Instantiate(menuBtnPrefab);
@@ -96,7 +100,23 @@ public class UIMenuButtonHolder : MonoBehaviour
                 startPosX + (horizontalOffset * (i % btnColCnt)),
                 startPosY - (verticalOffset * (i / btnColCnt)));
             btn.SetSize(btnWidth, btnHeight);
-            btn.UpdateInfo(ref _btnInfos[i], _onClickCallback);
+
+            // 게으른 초기화(Lazy Initialization)
+            btn.Init(i, _btnInfos[i], _onClickCallback);
+            //btn.UpdateInfo(_btnInfos[i]);
+
+            // 리스트에 게임오브젝트 추가
+            btnList.Add(btnGo);
         }
     }
-}
+    private void DestroyButtons()
+    {
+        if (btnList == null) return;
+        foreach(GameObject btnGo in btnList)
+            Destroy(btnGo); // node내부 GameObject 정리
+        
+            btnList.Clear(); // node memory 정리
+
+    }
+
+} // end of class
