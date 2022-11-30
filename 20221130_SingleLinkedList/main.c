@@ -10,7 +10,7 @@ typedef struct _SNode
 void Add(SNode** _pHead, int _data);
 
 //과제 1. 원하는 인덱스에 데이터 삽입
-void Insert(SNode** _pHead, const int const _idx, const int const _data);
+void Insert(SNode** const _pHead, const int const _idx, const int const _data);
 // 과제 2.원하는 인덱스의 데이터를 지움
 void RemoveAt(SNode** _pHead, int _idx);
 // 과제 3. 길이구하는함수
@@ -26,16 +26,18 @@ int main()
 	Add(&pHead, 2);
 	Add(&pHead, 3);
 	Add(&pHead, 77);
-	Add(&pHead, 3);
+	Add(&pHead, 5);
 	PrintAll(pHead);
 	printf("SLL Count : %d,\n", Count(pHead));
-	Insert(&pHead, 0, 0000);
-	Insert(&pHead, 1, 1111);
-	Insert(&pHead, 2, 2222);
+
+	Insert(&pHead, 0, 3333);
 	Insert(&pHead, 3, 3333);
+	//Insert(&pHead, 1, 1111);
+	//Insert(&pHead, 2, 2222);
+	//Insert(&pHead, 3, 3333);
 
 	//DestroyAll(&pHead);
-	//PrintAll("%p\n",pHead);
+	PrintAll(pHead);
 	return 0;
 }
 
@@ -62,42 +64,27 @@ void Add(SNode** _pHead, int _data)
 	}
 }
 
-void Insert(SNode** _pHead, const int const _idx, const int const _data)
+void Insert(SNode** const _pHead, const int const _idx, const int const _data)
 {
-	// 원하는 인덱스(순서)에 노드 삽입하는 함수
-	// idx만큼 노드 건너뛰어서 삭제하자
-	int idx = 0;
-	SNode* pTemp = *_pHead;
 	if (_pHead == NULL) return;
-	if (*_pHead == NULL)
+
+
+	SNode* pPrevNode = (SNode*)malloc(sizeof(SNode));
+	SNode* pNewNode = (SNode*)malloc(sizeof(SNode));
+	pNewNode->data = _data;
+	
+	SNode* pCurrentNode = *_pHead;
+
+	for (int i = 0; i < _idx; i++)
 	{
-		idx = 0;
-		printf("_pHead is empty");
-		// *_pHead가 비었으면 여기서부터 데이터 0넣고 idx만큼 next해서 데이터 삽입해 줌
-		// _idx == 0인 경우와 아닌경우 나눠서 
-		if (_idx == 0)
-		{
-			pTemp->data = _data;
-		}
-		else {
-			for (int i = 0; i < idx; i++)
-			{
-				pTemp->data = 0;
-				pTemp = pTemp->pNext;
-				pTemp = _data;
-				pTemp->pNext = NULL;
-			}
-		}
-
-
+		pPrevNode = pCurrentNode;
+	
+		printf("%d\n", i);
+		pCurrentNode = pCurrentNode->pNext;
 	}
-	else {
-
-	}
-
-
-
-
+	pPrevNode->pNext = pNewNode;
+	pNewNode->pNext = pCurrentNode;
+	
 }
 int Count(SNode* _pHead)
 {
