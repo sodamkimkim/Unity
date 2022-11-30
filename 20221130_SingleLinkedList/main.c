@@ -11,9 +11,9 @@ void Add(const SNode** const _pHead, const int const _data);
 // 과제1. 
 // 해당 인덱스에 _data삽입
 // 원래 있던 건 밀리게 했음
-void insert(const SNode** const _pHead, const int const _idx, const int const _data);
+void Insert(const SNode** const _pHead, const int const _idx, const int const _data);
 //과제 2.
-void RemoveAt(SNode** _pHead, int _idx);
+void RemoveAt(const SNode** const  _pHead, const int const _idx);
 // 과제 3.
 int Count(const SNode* const _pHead);
 
@@ -27,8 +27,8 @@ int main()
 	Add(&pHead, 1);
 	Add(&pHead, 2);
 	Add(&pHead, 3);
-	insert(&pHead, 0, 0000);
-	insert(&pHead, 5, 5555);
+	Insert(&pHead, 0, 222);
+	Insert(&pHead, 2, 5555);
 	//insert(&pHead, 1, 1111);
 	PrintAll(pHead);
 	printf("%d개\n", Count(pHead));
@@ -63,10 +63,10 @@ void Add(const SNode** const _pHead, const int const _data)
 		pCurNode->pNext = pNewNode;
 	}
 }
-void insert(const SNode** const _pHead, const int const _idx, const int const _data)
+void Insert(const SNode** const _pHead, const int const _idx, const int const _data)
 {
 	if (_pHead == NULL) return;
-	SNode* pPrevNode = _pHead;
+	SNode* pPrevNode = *_pHead;
 	SNode* pNewNode = (SNode*)malloc(sizeof(SNode));
 	SNode* pCurNode = *_pHead;
 	pNewNode->data = _data;
@@ -89,10 +89,10 @@ void insert(const SNode** const _pHead, const int const _idx, const int const _d
 	pNewNode->pNext = pCurNode;
 	return;
 }
-void RemoveAt(SNode** _pHead, int _idx)
+void RemoveAt(const SNode** const _pHead, const int const _idx)
 {
 	if (_pHead == NULL) return;
-	SNode* pPrevNode = _pHead;
+	SNode* pPrevNode = *_pHead;
 	SNode* pDestroyNode = NULL;
 	SNode* pCurNode = *_pHead;
 	SNode* pNextNode = *_pHead;
