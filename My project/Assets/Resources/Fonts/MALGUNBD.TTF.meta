@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b2aebd9a6a893fe4583e3850d08ae748
+guid: 1f4cbf86dbcab074ca76d9abe15805a1
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,7 @@ TrueTypeFontImporter:
   fontNames:
   - Malgun Gothic
   fallbackFontReferences:
-  - {fileID: 12800000, guid: 71bc695e02f3fb4499d8171c3ed08552, type: 3}
+  - {fileID: 12800000, guid: c53addf86dbec8148b8c61a7dd158bdd, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

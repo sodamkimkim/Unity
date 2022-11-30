@@ -1,0 +1,3 @@
+﻿  main.c
+C:\Users\admin\source\repos\20221130_SingleLinkedList\main.c(80,22): warning C4028: formal parameter 1 different from declaration
+  20221130_SingleLinkedList.vcxproj -> C:\Users\admin\source\repos\20221130_SingleLinkedList\Debug\20221130_SingleLinkedList.exe

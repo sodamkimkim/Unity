@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class UIMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private RectTransform backPanelTr = null;
+    private UIMenuButtonHolder btnHolder = null;
+
+    private void Awake()
     {
-        
+        btnHolder =
+            GetComponentInChildren<UIMenuButtonHolder>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init(
+        VendingMachine.SButton[] _btnInfos,
+        UIMenuButton.OnClickDelegate _onClickCallback,
+        int _btnColCnt)
     {
-        
+        btnHolder.BuildButtons(
+            _btnInfos,
+            _onClickCallback,
+            _btnColCnt,
+            backPanelTr.sizeDelta
+            );
     }
 }
