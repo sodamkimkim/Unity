@@ -4,17 +4,18 @@ typedef struct _SNode
 {
 	int data;
 	struct _SNode* pNext;
-} SNode;
+}SNode;
 
-// SLL젤 마지막에 데이터 삽입
-void Add(SNode** _pHead, int _data);
+void Add(const SNode** const _pHead, const int const _data);
 
-//과제 1. 원하는 인덱스에 데이터 삽입
-void Insert(SNode** const _pHead, const int const _idx, const int const _data);
-// 과제 2.원하는 인덱스의 데이터를 지움
+// 과제1. 
+// 해당 인덱스에 _data삽입
+// 원래 있던 건 밀리게 했음
+void insert(const SNode** const _pHead, const int const _idx, const int const _data);
+//과제 2.
 void RemoveAt(SNode** _pHead, int _idx);
-// 과제 3. 길이구하는함수
-int Count(SNode* _pHead);
+// 과제 3.
+int Count(const SNode* const _pHead);
 
 void PrintAll(const SNode* const _pHead);
 void DestroyAll(SNode** _pHead);
@@ -22,39 +23,38 @@ void DestroyAll(SNode** _pHead);
 int main()
 {
 	SNode* pHead = NULL;
+	Add(&pHead, 0);
 	Add(&pHead, 1);
 	Add(&pHead, 2);
 	Add(&pHead, 3);
-	Add(&pHead, 77);
-	Add(&pHead, 5);
+	insert(&pHead, 0, 0000);
+	insert(&pHead, 5, 5555);
+	//insert(&pHead, 1, 1111);
 	PrintAll(pHead);
-	printf("SLL Count : %d,\n", Count(pHead));
+	printf("%d개\n", Count(pHead));
 
-	Insert(&pHead, 0, 3333);
-	Insert(&pHead, 3, 3333);
-	//Insert(&pHead, 1, 1111);
-	//Insert(&pHead, 2, 2222);
-	//Insert(&pHead, 3, 3333);
-
-	//DestroyAll(&pHead);
+	printf("//////////After remove//////////\n");
+	printf("Remove index 2\n");
+	RemoveAt(&pHead, 2);
+	printf("Remove index 0\n");
+	RemoveAt(&pHead, 0);
 	PrintAll(pHead);
+	printf("%d개\n", Count(pHead));
 	return 0;
-}
+} // end of main
 
-void Add(SNode** _pHead, int _data)
+void Add(const SNode** const _pHead, const int const _data)
 {
 	if (_pHead == NULL) return;
 	SNode* pNewNode = (SNode*)malloc(sizeof(SNode));
 	pNewNode->data = _data;
 	pNewNode->pNext = NULL;
-
 	if (*_pHead == NULL)
 	{
 		*_pHead = pNewNode;
 		return;
 	}
-	else
-	{
+	else {
 		SNode* pCurNode = *_pHead;
 		while (pCurNode->pNext != NULL)
 		{
@@ -63,39 +63,71 @@ void Add(SNode** _pHead, int _data)
 		pCurNode->pNext = pNewNode;
 	}
 }
-
-void Insert(SNode** const _pHead, const int const _idx, const int const _data)
+void insert(const SNode** const _pHead, const int const _idx, const int const _data)
 {
 	if (_pHead == NULL) return;
-
-
-	SNode* pPrevNode = (SNode*)malloc(sizeof(SNode));
+	SNode* pPrevNode = _pHead;
 	SNode* pNewNode = (SNode*)malloc(sizeof(SNode));
+	SNode* pCurNode = *_pHead;
 	pNewNode->data = _data;
-	
-	SNode* pCurrentNode = *_pHead;
 
-	for (int i = 0; i < _idx; i++)
+	int idxTemp = 0;
+	if (_idx == 0)
 	{
-		pPrevNode = pCurrentNode;
-	
-		printf("%d\n", i);
-		pCurrentNode = pCurrentNode->pNext;
+		*_pHead = pNewNode;
+
 	}
-	pPrevNode->pNext = pNewNode;
-	pNewNode->pNext = pCurrentNode;
-	
+	else {
+		while (idxTemp != _idx)
+		{
+			pPrevNode = pCurNode;
+			pCurNode = pCurNode->pNext;
+			idxTemp++;
+		}
+		pPrevNode->pNext = pNewNode;
+	}
+	pNewNode->pNext = pCurNode;
+	return;
 }
-int Count(SNode* _pHead)
+void RemoveAt(SNode** _pHead, int _idx)
+{
+	if (_pHead == NULL) return;
+	SNode* pPrevNode = _pHead;
+	SNode* pDestroyNode = NULL;
+	SNode* pCurNode = *_pHead;
+	SNode* pNextNode = *_pHead;
+	int idxTemp = 0;
+	if (_idx == 0)
+	{
+		*_pHead = pCurNode->pNext;
+	}
+	else {
+		// 1  2
+		while (idxTemp != _idx)
+		{
+			pPrevNode = pCurNode;
+			pDestroyNode = pCurNode;
+			pCurNode = pCurNode->pNext;
+			idxTemp++;
+		}
+		pNextNode = pCurNode->pNext;
+		pPrevNode->pNext = pNextNode;
+	}
+	pDestroyNode = NULL;
+	free(pDestroyNode);
+	return;
+
+
+}
+int Count(const SNode* const _pHead)
 {
 	int cnt = 0;
 	if (_pHead == NULL)
 	{
-		printf("_pHead is empty!\n");
+		printf("_pHead is NULL\n");
 		cnt = 0;
 	}
-	else
-	{
+	else {
 		SNode* pTemp = _pHead;
 		while (pTemp != NULL)
 		{
@@ -103,14 +135,12 @@ int Count(SNode* _pHead)
 			pTemp = pTemp->pNext;
 		}
 	}
-	//printf("SLL cnt: %d\n", cnt);
 	return cnt;
 }
-void PrintAll(SNode* _pHead)
+void PrintAll(const SNode* const _pHead)
 {
 	if (_pHead == NULL)
 	{
-		printf("_pHead is empty!\n");
 		return;
 	}
 	SNode* pCurNode = _pHead;
@@ -123,7 +153,6 @@ void PrintAll(SNode* _pHead)
 	}
 	printf("(%d)\n", cnt);
 }
-
 void DestroyAll(SNode** _pHead)
 {
 	SNode* pCurNode = *_pHead;
@@ -138,6 +167,5 @@ void DestroyAll(SNode** _pHead)
 			pDestroyNode = NULL;
 		}
 	}
-
 	*_pHead = NULL;
 }
