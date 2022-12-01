@@ -10,11 +10,11 @@ typedef struct _SNode
 	struct _SNode* pRight;
 }SNode;
 
-void Add(SNode** _pHead, int _data);
-void PrintAll(SNode* _pHead);
-void PrintRecursive(SNode* _pNode);
-void DestroyAll(SNode** _pHead);
-void DestroyRecursive(SNode** _pNode);
+void Add(const SNode** const _pHead, const int const _data);
+void PrintAll(const SNode* const _pHead);
+void PrintRecursive(const SNode* const _pNode);
+void DestroyAll(const SNode** const _pHead);
+void DestroyRecursive(const SNode** const _pNode);
 
 // 과제0
 int CountTotal(SNode* _pHead);
@@ -49,7 +49,7 @@ int main()
 	DestroyAll(&pHead);
 	return 0;
 }
-void Add(SNode** _pHead, int _data)
+void Add(const SNode** const _pHead, const int const _data)
 {
 	if (_pHead == NULL)return;
 	SNode* pNewNode = (SNode*)malloc(sizeof(SNode));
@@ -68,8 +68,8 @@ void Add(SNode** _pHead, int _data)
 	{
 		if (pNewNode->data < pCurNode->data)
 		{
-			printf("L - ");
 			//왼쪽으로 이동
+			printf("L - ");
 			if (pCurNode->pLeft == NULL)
 			{
 				printf("LE\n");
@@ -83,11 +83,11 @@ void Add(SNode** _pHead, int _data)
 			}
 		}
 		else {
-			printf("R - ");
 			//오른쪽으로 이동
+			printf("R - ");
 			if (pCurNode->pRight == NULL)
 			{
-				printf("LE\n");
+				printf("RE\n");
 				pCurNode->pRight = pNewNode;
 				break;
 			}
@@ -98,13 +98,13 @@ void Add(SNode** _pHead, int _data)
 		}
 	}
 }
-void PrintAll(SNode* _pHead)
+void PrintAll(const SNode* const _pHead)
 {
 	if (_pHead == NULL)return;
 	PrintRecursive(_pHead);
 	printf("\n");
 }
-void PrintRecursive(SNode* _pNode)
+void PrintRecursive(const SNode* const _pNode)
 {
 	if (_pNode == NULL)return;
 	PrintRecursive(_pNode->pLeft);
@@ -112,10 +112,10 @@ void PrintRecursive(SNode* _pNode)
 	PrintRecursive(_pNode->pRight);
 
 }
-void DestroyAll(SNode** _pHead) {
+void DestroyAll(const SNode** const _pHead) {
 	DestroyRecursive(_pHead);
 }
-void DestroyRecursive(SNode** _pNode)
+void DestroyRecursive(const SNode** const _pNode)
 {
 	if ((*_pNode) == NULL)return;
 	DestroyRecursive(&((*_pNode)->pLeft));
