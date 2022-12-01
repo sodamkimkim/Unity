@@ -14,7 +14,9 @@ SNode tail;
 void Add(SNode* const _pNewNode);
 
 int Count();
+// 과제
 void Insert(const int const _idx, const SNode* const _pNewNode);
+// 과제
 void RemoveAt(const int const _idx);
 // 과제
 void DestroyAll();
