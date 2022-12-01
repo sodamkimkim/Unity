@@ -1,2 +1,0 @@
-C:\Users\admin\source\repos\20221130_SingleLinkedList\Debug\20221130_SingleLinkedList.exe
-C:\Unity\20221130_SingleLinkedList\Debug\20221130_SingleLinkedList.exe
