@@ -1,0 +1,3 @@
+﻿  main.c
+C:\Unity\20221201_BinaryTree\main.c(36,18): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+  20221201_BinaryTree.vcxproj -> C:\Unity\20221201_BinaryTree\Debug\20221201_BinaryTree.exe
