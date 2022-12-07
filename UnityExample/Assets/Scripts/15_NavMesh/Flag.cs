@@ -13,12 +13,12 @@ public class Flag : MonoBehaviour
     private Color lineColor = Color.white;
     private void Start()
     {
-        //lineColor = new Color(
-        //    Random.Range(0f, 1f),
-        //    Random.Range(0f, 1f),
-        //    Random.Range(0f, 1f)
-        //    );
-        lineColor = new Color(256f,256f, 256f);
+        lineColor = new Color(
+            Random.Range(0f, 1f),
+            Random.Range(0f, 1f),
+            Random.Range(0f, 1f)
+            );
+
     }
     public Vector3 GetPosition()
     {

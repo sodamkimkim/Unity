@@ -35,10 +35,13 @@ public class PathFinder : MonoBehaviour
 
             while (true)
             {
+                Vector3 firstPos = transform.position;
+                firstPos.y = 0f;
+                Vector3 secondPos = pathFlags[curIdx].GetPosition();
+                secondPos.y = 0f;
                 float dist = Vector3.Distance(
-                    transform.position,
-                    pathFlags[curIdx].GetPosition());
-                if (dist < 0.1f) break;
+                    firstPos, secondPos);
+                if (dist < 1f) break;
 
                 yield return null;
             }

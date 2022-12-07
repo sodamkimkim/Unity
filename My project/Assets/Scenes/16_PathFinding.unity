@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,23 +136,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781480, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: nextFlags.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781480, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: nextFlags.Array.data[0]
       value: 
-      objectReference: {fileID: 1677904164}
+      objectReference: {fileID: 1989480820}
     - target: {fileID: 6941565800545781480, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: nextFlags.Array.data[1]
       value: 
-      objectReference: {fileID: 879700090}
+      objectReference: {fileID: 1677904164}
     - target: {fileID: 6941565800545781480, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: nextFlags.Array.data[2]
       value: 
       objectReference: {fileID: 879700090}
+    - target: {fileID: 6941565800545781480, guid: df6995177be099b4199d135271cb31b3, type: 3}
+      propertyPath: nextFlags.Array.data[3]
+      value: 
+      objectReference: {fileID: 1013752107}
     - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_Name
-      value: P_Flag (2)
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_RootOrder
@@ -237,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 793633784}
     - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_Name
-      value: P_Flag (5)
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_RootOrder
@@ -326,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 1989480820}
     - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_Name
-      value: P_Flag (0)
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_RootOrder
@@ -651,7 +655,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -700,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 1989480820}
     - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_Name
-      value: P_Flag (1)
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_RootOrder
@@ -841,7 +845,7 @@ PrefabInstance:
       objectReference: {fileID: 1655448209}
     - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_Name
-      value: P_Flag (3)
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_RootOrder
@@ -849,7 +853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.7
+      value: 10.6
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -857,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.2
+      value: 10.58
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1108,10 +1112,14 @@ PrefabInstance:
     - target: {fileID: 6941565800545781480, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: nextFlags.Array.data[1]
       value: 
-      objectReference: {fileID: 1655448209}
+      objectReference: {fileID: 1677904164}
     - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_Name
-      value: P_Flag (4)
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6941565800545781481, guid: df6995177be099b4199d135271cb31b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6941565800545781483, guid: df6995177be099b4199d135271cb31b3, type: 3}
       propertyPath: m_RootOrder
