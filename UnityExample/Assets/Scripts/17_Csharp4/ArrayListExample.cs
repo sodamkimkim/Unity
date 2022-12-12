@@ -6,19 +6,6 @@ using System;
 public class ArrayListExample : MonoBehaviour
 {
     private ArrayList arrList = null;
-
-    //public class StringCompare : IComparer
-    //{
-    //    int IComparer.Compare(object _lhs, object _rhs)
-    //    {
-    //        int lhsStr = _lhs.CompareTo(_rhs);
-    //        int rhsStr = Convert.ToInt32(_rhs.ToString());
-    //        if (lhsStr > rhsStr)return 1;
-    //        else if (lhsStr < rhsStr)return -1;
-    //        else return 0;
-
-    //    }
-    //} // end of class StringCompare : IComparer
     public class StringCompare : IComparer
     {
         public int Compare(object _lhs, object _rhs)
@@ -38,8 +25,8 @@ public class ArrayListExample : MonoBehaviour
             123.45f
         };
         // var에는 어떤 자료형이든 들어간다.
-        foreach (var value in arrList)
-            Debug.Log(value + " : " + value.GetType());
+        //foreach (var value in arrList)
+        //    Debug.Log(value + " : " + value.GetType());
 
         //double d = (double)arrList[1];
         //arrList.Add("asdf");
@@ -50,7 +37,8 @@ public class ArrayListExample : MonoBehaviour
 
         // Sort -> ArrayList는 내부 데이터의 자료형이 다 다르기 때문에 Sort하기 위해서 어떤 기준으로 정렬해야할 지 모른다.
         // IComparable / ICaparer 정의해서 정렬하는 방법 구현해 줘야 한다.
-        arrList.Sort(new StringCompare());
+        //arrList.Sort(new StringCompare());
+        arrList.Sort();
         foreach (var value in arrList)
             Debug.Log(value);
 

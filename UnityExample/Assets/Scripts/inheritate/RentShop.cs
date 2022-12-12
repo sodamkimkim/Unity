@@ -12,21 +12,7 @@ public class RentShop : MonoBehaviour
         for (int i = 0; i < (int)Menu.EType.Len; ++i)
             menu.SetOnClickCallback((Menu.EType)i, OnClickCallback);
     }
-    //public void OnClickCar()
-    //{
-    //    Debug.Log("Ride to Car");
-    //    player.RideTo(new Car());
-    //}
-    //public void OnClickBoat()
-    //{
-    //    Debug.Log("Ride to Boat");
-    //    player.RideTo(new Boat());
-    //}
-    //public void OnClickBike()
-    //{
-    //    Debug.Log("Ride to Bike");
-    //    player.RideTo(VehicleFactory(Menu.EType.Bike));
-    //}
+
     public void OnClickCallback(Menu.EType _type)
     {
         Debug.Log("Ride to " + _type.ToString());
