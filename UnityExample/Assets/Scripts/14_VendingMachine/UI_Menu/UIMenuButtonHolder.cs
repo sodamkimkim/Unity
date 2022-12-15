@@ -62,8 +62,6 @@ public class UIMenuButtonHolder : MonoBehaviour
         UIMenuButton.OnClickDelegate _onClickCallback,
         int _btnColCnt, Vector2 _backPanelSize)
     {
-    
-
         btnTotalCnt = _btnInfos.Length;
         btnColCnt = _btnColCnt;
         if (btnTotalCnt <= 0) btnTotalCnt = 1;
