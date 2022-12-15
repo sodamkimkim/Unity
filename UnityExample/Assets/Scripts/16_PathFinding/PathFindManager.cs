@@ -13,5 +13,8 @@ public class PathFindManager : MonoBehaviour
     {
         pathFinding.Searching();
         pathFinding.PrintPathList();
+
+        pathFinder.SetPathFlags(
+            pathFinding.GetShortPath());
     }
-} // end of class
+}
