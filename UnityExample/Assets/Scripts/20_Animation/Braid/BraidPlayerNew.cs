@@ -26,5 +26,8 @@ public class BraidPlayerNew : MonoBehaviour
 
         //IsDumchit 제어
         anim.SetBool("IsDumchit", Input.GetKey(KeyCode.F));
+
+        //IsFallDown 제어
+        anim.SetBool("IsFallDown", Input.GetKey(KeyCode.DownArrow));
     }
 }

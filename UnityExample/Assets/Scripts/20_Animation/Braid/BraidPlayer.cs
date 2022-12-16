@@ -17,7 +17,7 @@ public class BraidPlayer : MonoBehaviour
     private SpriteRenderer sr = null;
 
     private int curFrame = 0; // 현재 몇번째 프레임을 렌더링하고있는지 정보 저장할 변수
-    private float changeTime = 0f; // 프레임을 바꾸기 위한 시간
+    private float changeTime = 0f; // 프레임을 바꾸기 위해 필요한 시간
     private float elapsedTime = 0f; // 누적시간.  시간이 될 때마다 프레임 일정하게 증가시켜줄 것.
     private void Awake()
     {
@@ -60,9 +60,12 @@ public class BraidPlayer : MonoBehaviour
                 break;
         }
         // 애니메이션이 바뀔 때 마다 초기화 되어야 하는 것들 전부 초기화 해 준다.
+        // 한 애니메이션을 1초동안 돌려주는게 보통 자연스러움.
+        // 그래서 sprite이미지(frame) 변환 기준은 1 / curClip.Length
         changeTime = 1f / curClip.Length;
         curFrame = 0;
         elapsedTime = 0f;
+        // 애니메이션 전환된 후 처음이미지 reset
         sr.sprite = curClip[curFrame];
     } // end of SetAnimationClip()
 
