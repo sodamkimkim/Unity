@@ -34,10 +34,10 @@ public class TileMapBuilder : MonoBehaviour
         float tileWHalf = tileW * 0.5f;
         float tileHHalf = tileH * 0.5f;
 
-        float startPosX = ((colCnt * tileW) * 0.5f * -1f) + 0.5f;
-        float starttPosY = ((rowCnt * tileH) * 0.5f) - 0.5f;
+        float startPosX = ((colCnt * tileW) * 0.5f * -1f) + tileWHalf;
+        float startPosY = ((rowCnt * tileH) * 0.5f) - tileHHalf;
 
-        Vector3 startPos = new Vector3(startPosX, starttPosY, 0f);
+        Vector3 startPos = new Vector3(startPosX, startPosY, 0f);
 
         for (int r = 0; r < rowCnt; r++)
         {
@@ -45,22 +45,26 @@ public class TileMapBuilder : MonoBehaviour
             {
                 float rowOffset = r * tileH;
                 float colOffset = c * tileW;
-                Vector3 tilePos = new Vector3(startPos.x + colOffset, starttPosY - rowOffset, startPos.z);
+                Vector3 tilePos = new Vector3(startPos.x + colOffset, startPos.y - rowOffset, startPos.z);
 
                 GameObject tileGo = Instantiate(tilePrefab, tilePos, Quaternion.identity);
                 tileGo.transform.SetParent(transform);
 
+                // SetSprite하기 위해서 tileGo의 Tile을 들고옴
                 Tile tile = tileGo.GetComponent<Tile>();
-                int tileIdx = mapInfo[r, c];
-                tile.SetSprite(tileImgs[tileIdx]);
-                // 2차원 배열 mapInfo의 순서와 List에 Add순서가 같아야 한다.
+                // mapInfo에 알맞는 tileImg를 찾아서 sprite에 던져줌
+                tile.SetSprite(tileImgs[mapInfo[r, c]]);
+                // list에 추가. list 순서는 2차원 배열인 mapInfo순서랑 같아야 한다.
                 tileList.Add(tile);
             }
         }
     } // end of Building()
 
-    // character의 tileIdx를 받아서
-    // return : tile의 position  => character가 이 위치로 가게 된다.
+    /*
+     character의 tileIdx를 받아서 
+    return tile의 position; 
+    => TileMapManager에서 이 함수를 이용해서 character가 tileIdx의 tile에 해당하는 위치로 가게된다.
+     */
     public Vector3 GetPosWithIdx(
         Character.TileIdx _tileIdx)
     {
@@ -70,6 +74,7 @@ public class TileMapBuilder : MonoBehaviour
         // 타일의 실제 position정보
         return tile.GetPosition();
     }
+    // Player가 이동할 수 있는 Map인지 확인하는 함수
     public bool CheckCanMove(Character.TileIdx _tileIdx)
     {
         // 맵 범위 벗어나면 못간다.
@@ -77,6 +82,7 @@ public class TileMapBuilder : MonoBehaviour
             return false;
         if (_tileIdx.y < 0 || _tileIdx.y > rowCnt - 1)
             return false;
+        // tille의 인덱스 들고와서 Sea or Stone이면 못들어간다.
         int tileInfo = mapInfo[_tileIdx.y, _tileIdx.x];
         if (tileInfo == (int)EType.Sea || tileInfo == (int)EType.Stone)
             return false;

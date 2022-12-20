@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    private int tileIdxX = 0;
-    private int tileIdxY = 0;
+
     public struct TileIdx
     {
         public int x, y;
@@ -15,7 +14,9 @@ public class Character : MonoBehaviour
             y = _y;
         }
     } // end of struct TileIdx
-    private TileIdx tileIdx = new TileIdx(0, 0);
+    private TileIdx tileIdx = new TileIdx(0,0);
+
+
     public void MoveUp()
     {
         --tileIdx.y;
@@ -24,14 +25,17 @@ public class Character : MonoBehaviour
     {
         ++tileIdx.y;
     }
+
     public void MoveLeft()
     {
         --tileIdx.x;
     }
+
     public void MoveRight()
     {
         ++tileIdx.x;
     }
+
     public TileIdx GetCurIndex()
     {
         return tileIdx;
@@ -42,6 +46,7 @@ public class Character : MonoBehaviour
     {
         _pos.z = -1f;
         transform.position = _pos;
+        
     }
 
 } // end of class Character
