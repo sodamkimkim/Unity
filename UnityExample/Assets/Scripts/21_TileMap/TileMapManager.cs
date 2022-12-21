@@ -4,19 +4,47 @@ using UnityEngine;
 
 public class TileMapManager : MonoBehaviour
 {
+    public enum EType { Grass, Road, Sea, Stone };
     [SerializeField]
     private TileMapBuilder mapBuilder = null;
     [SerializeField]
     private Character character = null;
 
+    // 외부 파일 로드해서 정보를 채울 예정
+    private int rowCnt = 0;
+    private int colCnt = 0;
+    private int[][] mapInfo = null;
+    //private int rowCnt = 5;
+    //private int colCnt = 5;
+
+    //// 0 : grass, 1 : road, 2 : Sea, 3 : Stone
+
+
+    ///* 타일 배치 info
+    // * # C#에서 이중배열 선언하는 2가지 방식
+    // * private int [ ] [ ]  or int[,]
+    // */
+    //private int[][] mapInfo = new int[5][]
+    //{
+    //     new int[5]{ 1,0,0,2,2 },
+    //     new int[5] { 1,1,0,2,2 },
+    //     new int[5]{ 0,1,1,0,2 },
+    //     new int[5]{ 3,0,1,1,0 },
+    //     new int[5]{ 3,3,0,1,1 }
+    //};
     /*
      1. 맵 생성
      2. Character 초기위치 지정 
      */
     private void Start()
     {
-        // 맵 생성
-        mapBuilder.Building();
+        FileManager fm = new FileManager();
+        // 우리 게임에서 쓸 .map확장자로 저장
+        //fm.Save("Stage.map", rowCnt, colCnt, mapInfo);
+        fm.Load("Stage.map", out rowCnt, out colCnt, out mapInfo);
+
+        if (rowCnt != 0 && colCnt != 0)
+            mapBuilder.Building(rowCnt, colCnt, mapInfo);
 
         // private TileIdx tileIdx = new TileIdx(0, 0);
         // character의 초기 인덱스 정보를 가지고 tile의 index랑 맵핑해서 tile의 position으로 character를 옮겨 줌
@@ -38,7 +66,7 @@ public class TileMapManager : MonoBehaviour
             Character.TileIdx curIdx = character.GetCurIndex();
             curIdx.x += 1;
             // 갈수 있는 맵인지 체크
-            if (mapBuilder.CheckCanMove(curIdx))
+            if (CheckCanMove(curIdx))
             {
                 // 'character index 구조체 정보(TileIdx)' update
                 character.MoveRight();
@@ -52,7 +80,7 @@ public class TileMapManager : MonoBehaviour
         {
             Character.TileIdx curIdx = character.GetCurIndex();
             curIdx.x -= 1;
-            if (mapBuilder.CheckCanMove(curIdx))
+            if (CheckCanMove(curIdx))
             {
                 character.MoveLeft();
                 UpdateCharPos();
@@ -64,7 +92,7 @@ public class TileMapManager : MonoBehaviour
         {
             Character.TileIdx curIdx = character.GetCurIndex();
             curIdx.y -= 1;
-            if (mapBuilder.CheckCanMove(curIdx))
+            if (CheckCanMove(curIdx))
             {
                 character.MoveUp();
                 UpdateCharPos();
@@ -76,7 +104,7 @@ public class TileMapManager : MonoBehaviour
         {
             Character.TileIdx curIdx = character.GetCurIndex();
             curIdx.y += 1;
-            if (mapBuilder.CheckCanMove(curIdx))
+            if (CheckCanMove(curIdx))
             {
                 character.MoveDown();
                 UpdateCharPos();
@@ -97,8 +125,23 @@ public class TileMapManager : MonoBehaviour
     private void UpdateCharPos()
     {
         Character.TileIdx tileIdx = character.GetCurIndex();
-        Vector3 tilePos = mapBuilder.GetPosWithIdx(tileIdx);
+        Vector3 tilePos = mapBuilder.GetPosWithIdx(tileIdx, colCnt);
         character.SetPosition(tilePos);
 
+    }
+    // Player가 이동할 수 있는 Map인지 확인하는 함수
+    public bool CheckCanMove(Character.TileIdx _tileIdx)
+    {
+        // 맵 범위 벗어나면 못간다.
+        if (_tileIdx.x < 0 || _tileIdx.x > colCnt - 1)
+            return false;
+        if (_tileIdx.y < 0 || _tileIdx.y > rowCnt - 1)
+            return false;
+        // tille의 인덱스 들고와서 Sea or Stone이면 못들어간다.
+        int tileInfo = mapInfo[_tileIdx.y][_tileIdx.x];
+        if (tileInfo == (int)EType.Sea || tileInfo == (int)EType.Stone)
+            return false;
+
+        return true;
     }
 } // end of class TileMapManager
