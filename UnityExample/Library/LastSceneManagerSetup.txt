@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/22_BGScroll.unity
+- path: Assets/Scenes/23_Terrain.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
