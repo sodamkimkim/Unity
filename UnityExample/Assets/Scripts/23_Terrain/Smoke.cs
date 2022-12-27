@@ -26,9 +26,8 @@ public class Smoke : MonoBehaviour
 
     private void OnParticleTrigger()
     {
-        // particle trigger전달 받으면 여기 호출된다.
+        // particle trigger발생 시, 이 함수가 호출된다.
         // particle의 Trigger는 particle System이 아니라 입자 하나하나의 충돌을 감지한다.
-
         // 충돌된 particle입자 리스트를 enterList에 받아준다.
         ps.GetTriggerParticles(
             ParticleSystemTriggerEventType.Enter, enterList);

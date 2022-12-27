@@ -73,7 +73,7 @@ public class Tourlist : MonoBehaviour
     {
         // cam const ¼³Á¤ °ª
         const float camRotX = 12.072f;
-        const float camRotY = 169.667f;
+        const float camRotY = 174.66f;
         const float camRotZ = -3.186f;
         camRot.z = camRotZ;
 
