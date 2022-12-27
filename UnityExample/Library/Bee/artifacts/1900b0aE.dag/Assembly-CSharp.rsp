@@ -488,6 +488,8 @@
 "Assets/Scripts/23_Terrain/Fireball.cs"
 "Assets/Scripts/23_Terrain/Smoke.cs"
 "Assets/Scripts/23_Terrain/Tourlist.cs"
+"Assets/Scripts/23_Terrain/Waterball.cs"
+"Assets/Scripts/23_Terrain/WaterballSmoke.cs"
 "Assets/Scripts/inheritate/Menu.cs"
 "Assets/Scripts/inheritate/Player222.cs"
 "Assets/Scripts/inheritate/RentShop.cs"

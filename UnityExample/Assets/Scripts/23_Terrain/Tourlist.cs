@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 과제 ) 각도 못넘어가게 
 public class Tourlist : MonoBehaviour
 {
     [SerializeField]
@@ -17,12 +16,11 @@ public class Tourlist : MonoBehaviour
     private float rotSpeed = 50f;
     private Vector3 camRot = Vector3.zero;
 
-
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
-        //camRot = cam.transform.rotation.eulerAngles;
+        camRot = cam.transform.rotation.eulerAngles;
     }
 
     private void Update()
@@ -50,7 +48,6 @@ public class Tourlist : MonoBehaviour
         {
             moveSpeed = 1000f;
             Destroy(bostGo);
-
         }
 
         Vector3 camF = cam.transform.forward;
@@ -74,22 +71,69 @@ public class Tourlist : MonoBehaviour
     }
     private void LookProcess()
     {
+        // cam const 설정 값
+        const float camRotX = 12.072f;
+        const float camRotY = 169.667f;
+        const float camRotZ = -3.186f;
+        camRot.z = camRotZ;
+
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-       
         camRot.x += -mouseY * rotSpeed * Time.deltaTime;
         camRot.y += mouseX * rotSpeed * Time.deltaTime;
-        camRot.z = 0f;
-        Debug.Log("(camRot.x: )-mouseY * rotSpeed * Time.deltaTime: " + -mouseY * rotSpeed * Time.deltaTime);
-        Debug.Log("(camRot.y: ) mouseX * rotSpeed * Time.deltaTime: " + mouseX * rotSpeed * Time.deltaTime);
 
-        // Tourist랑 카메라랑 각도 제한
-        cam.transform.rotation = Quaternion.Euler(camRot);
+        // Space누르면 camRot default로 초기화
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space");
+            camRot.x = camRotX;
+            camRot.y = camRotY;
+            cam.transform.rotation = Quaternion.Euler(camRot);
+        }
+
+        // 카메라랑 각도 움직임 제한
+        // x축 회전 제한
+        if (Mathf.Abs(camRotX - camRot.x) <= 30f)
+        {
+            cam.transform.rotation = Quaternion.Euler(camRot);
+        }
+        else
+        {
+            if (camRot.x < 0)
+            {
+                camRot.x = camRotX - 30f;
+                cam.transform.rotation = Quaternion.Euler(camRot);
+
+            }
+            else
+            {
+                camRot.x = camRotX + 30f;
+                cam.transform.rotation = Quaternion.Euler(camRot);
+            }
+        }
+        // y축 회전 제한
+        if (Mathf.Abs(camRotY - camRot.y) <= 30f)
+        {
+            cam.transform.rotation = Quaternion.Euler(camRot);
+        }
+        else
+        {
+            if (camRotY > camRot.y )
+            {
+                camRot.y = camRotY - 30f;
+                cam.transform.rotation = Quaternion.Euler(camRot);
+            }
+            else
+            {
+                camRot.y = camRotY + 30f;
+                cam.transform.rotation = Quaternion.Euler(camRot);
+
+            }
+        }
     }
     private void SpawnFxPang()
     {
         Instantiate(fxPangPrefab, cam.transform.position + (cam.transform.forward * 3f), Quaternion.identity);
     }
-
 }
