@@ -16,14 +16,13 @@ public class Tourlist : MonoBehaviour
     private float moveSpeed = 1000f;
     private float rotSpeed = 50f;
     private Vector3 camRot = Vector3.zero;
-    Vector3 initialCamRot = Vector3.zero;
+
 
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
         //camRot = cam.transform.rotation.eulerAngles;
-        initialCamRot = cam.transform.rotation.eulerAngles;
     }
 
     private void Update()
@@ -75,38 +74,18 @@ public class Tourlist : MonoBehaviour
     }
     private void LookProcess()
     {
-
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        camRot.z = 0f;
-
-        Debug.Log("Mouse X : " + mouseX);
-        Debug.Log("Mouse Y : " + mouseY);
-        camRot.x = -mouseY * rotSpeed * Time.deltaTime;
-        camRot.y = mouseX * rotSpeed * Time.deltaTime;
-        if (camRot.x >= 5f)
-            camRot.x = 5f;
-        if (camRot.x <= -5f)
-            camRot.x = -5f;
-
-        if (camRot.y >= 15f)
-            camRot.y = 15f;
-        if (camRot.y <= -15f)
-            camRot.y = -15f;
-
-        Vector3 objQ = transform.rotation.eulerAngles;
-        Vector3 camQ = cam.transform.rotation.eulerAngles;
-
-        if (Mathf.Abs(initialCamRot.x - camQ.x) <=10f  && Mathf.Abs(initialCamRot.y - camQ.y) <= 10f)
-            cam.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + camRot);
        
+        camRot.x += -mouseY * rotSpeed * Time.deltaTime;
+        camRot.y += mouseX * rotSpeed * Time.deltaTime;
+        camRot.z = 0f;
+        Debug.Log("(camRot.x: )-mouseY * rotSpeed * Time.deltaTime: " + -mouseY * rotSpeed * Time.deltaTime);
+        Debug.Log("(camRot.y: ) mouseX * rotSpeed * Time.deltaTime: " + mouseX * rotSpeed * Time.deltaTime);
 
-
-
-
-
-
+        // Tourist¶û Ä«¸Þ¶ó¶û °¢µµ Á¦ÇÑ
+        cam.transform.rotation = Quaternion.Euler(camRot);
     }
     private void SpawnFxPang()
     {
