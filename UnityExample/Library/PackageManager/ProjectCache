@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638077402404321726
+      ticks: 638077840134044352
     m_Hash: 2943592675
   m_LockFileStatus:
     m_FilePath: C:/Unity/UnityExample/Packages/packages-lock.json
@@ -13,14 +13,14 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638077413587177981
-    m_Hash: 514046505
+      ticks: 638077841027449883
+    m_Hash: 2348628241
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: C:/Unity/UnityExample/Packages
-m_EditorVersion: 2021.3.12f1 (8af3c3e441b1)
+m_EditorVersion: 2021.3.10f1 (1c7d0df0160b)
 m_ResolvedPackages:
 - packageId: com.unity.2d.sprite@1.0.0
   testable: 0
@@ -228,7 +228,7 @@ m_ResolvedPackages:
     version: 1.0.1
   resolvedDependencies:
   - name: com.unity.services.core
-    version: 1.4.3
+    version: 1.4.2
   - name: com.unity.modules.unitywebrequest
     version: 1.0.0
   - name: com.unity.nuget.newtonsoft-json
@@ -3113,12 +3113,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.0.6
     nextVersion: 
-- packageId: com.unity.services.core@1.4.3
+- packageId: com.unity.services.core@1.4.2
   testable: 0
   isDirectDependency: 0
-  version: 1.4.3
+  version: 1.4.2
   source: 1
-  resolvedPath: C:\Unity\UnityExample\Library\PackageCache\com.unity.services.core@1.4.3
+  resolvedPath: C:\Unity\UnityExample\Library\PackageCache\com.unity.services.core@1.4.2
   assetPath: Packages/com.unity.services.core
   name: com.unity.services.core
   displayName: Services Core
@@ -3156,6 +3156,7 @@ m_ResolvedPackages:
     - 1.6.0
     - 1.7.0
     compatible:
+    - 1.4.2
     - 1.4.3
     - 1.5.2
     - 1.6.0
@@ -3185,16 +3186,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 637959096350000000
+  datePublishedTicks: 637919618520000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
-    revision: 145c9bbe93bde4784d4641e172be4ca40a3745fc
+    revision: 3964d1641ebec474aa425853985bccbdb89c2a49
     path: 
   unityLifecycle:
-    version: 1.4.3
+    version: 1.4.2
     nextVersion: 
 - packageId: com.unity.nuget.newtonsoft-json@3.0.2
   testable: 0

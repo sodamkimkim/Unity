@@ -68,6 +68,7 @@ public class Tourlist : MonoBehaviour
         //cc.Move
         // 중력 계산하고 움직인다. rigidbody없는 상황에서는 simpleMove 쓰면 된다.
         cc.SimpleMove(dir * moveSpeed * Time.deltaTime);
+        //cc.Move(dir * moveSpeed * Time.deltaTime);
     }
     private void LookProcess()
     {
