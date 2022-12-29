@@ -7,13 +7,18 @@ public class UIMenu : MonoBehaviour
     private Transform tr = null;
     private RectTransform rt = null;
     private bool isAnimation = false;
-    private float movingSpeed = 0.1f;
-    private bool isShow = true;
+    private float movingSpeed = 5f;
+    private bool isShow = false;
 
     private void Awake()
     {
         tr = transform;
         rt = GetComponent<RectTransform>();
+    }
+    private void Start()
+    {
+
+        Hide();
     }
     private void Update()
     {
