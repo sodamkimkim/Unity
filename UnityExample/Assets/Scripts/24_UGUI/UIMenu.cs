@@ -8,7 +8,7 @@ public class UIMenu : MonoBehaviour
     private RectTransform rt = null;
     private bool isAnimation = false;
     private float movingSpeed = 5f;
-    private bool isShow = false;
+    private bool isShow = true;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class UIMenu : MonoBehaviour
     private void Start()
     {
 
-        Hide();
+   
     }
     private void Update()
     {

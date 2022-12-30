@@ -20,7 +20,7 @@ public class Cooltime : MonoBehaviour
     }
     private void Update()
     {
-        if (isReady == true && Input.GetKeyDown(KeyCode.S))
+        if (isReady == true && Input.GetKeyDown(KeyCode.C))
         {
             StartCoroutine(CooltimeCoroutine());
         }

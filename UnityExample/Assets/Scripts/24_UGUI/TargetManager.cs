@@ -14,16 +14,15 @@ public class TargetManager : MonoBehaviour
     private float targetSpwnRange = 15f;
     private Target target = null;
 
-    private void Start()
+    [SerializeField]
+    private DefenceTower defenceTower = null;
+
+    public Target GetTarget()
     {
-        SpawnTarget();
+        return target;
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-            SpawnTarget();
-    }
-    private void SpawnTarget()
+
+    public void SpawnTarget(Target.DestroyCallback _destroyCallback)
     {
         // # Object Pooling
         // ㄴ obj 동적할당 다 해놓고, 파괴하며 쓰는게 아니라 위치만 이동해 가며 재활용 하는 기법
@@ -32,15 +31,15 @@ public class TargetManager : MonoBehaviour
             GameObject go = Instantiate(targetPrefab);
             target = go.GetComponent<Target>();
         }
-        target.Init(GetRandomPosition(targetSpwnRange), TargetDestroyCallback, hpBarHolder);
+        target.Init(GetRandomPosition(targetSpwnRange), _destroyCallback, hpBarHolder, defenceTower);
     }
     private Vector3 GetRandomPosition(float _range)
     {
         return new Vector3(Random.Range(-_range, _range), 0f, Random.Range(-_range, _range));
     }
 
-    private void TargetDestroyCallback()
-    {
-        SpawnTarget();
-    }
+    //private void TargetDestroyCallback()
+    //{
+    //    SpawnTarget();
+    //}
 } // end of class
