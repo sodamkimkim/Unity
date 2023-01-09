@@ -356,7 +356,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs"
+"Assets/AssetStoreTools/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs"
 "Assets/Scripts/01_Transform/Rotate.cs"
 "Assets/Scripts/01_Transform/Scale.cs"
 "Assets/Scripts/01_Transform/Translate.cs"
@@ -480,12 +480,6 @@
 "Assets/Scripts/inheritate/Vehicles/Vehicle.cs"
 "Assets/Scripts/MyProject/Tank.cs"
 "Assets/Scripts/Pyramid/Pyramid.cs"
-"Assets/Shared/Ramps/Runtime/RampAsset.cs"
-"Assets/Shared/Scripts/AdjustTimeScale.cs"
-"Assets/Shared/Scripts/ProximityActivate.cs"
-"Assets/Shared/Scripts/SimpleCameraController.cs"
-"Assets/Shared/Scripts/SimpleCharacterMotor.cs"
-"Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 
 /deterministic
