@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/myproject.unity
+- path: Assets/Scenes/25_UGUI2 1.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

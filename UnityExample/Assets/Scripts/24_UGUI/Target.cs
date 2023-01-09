@@ -37,7 +37,7 @@ public class Target : MonoBehaviour
     public void Damage(int _power)
     {
         hp -= _power;
-            Instantiate(damagedPSPrefab, transform.position + Vector3.up * 2, Quaternion.Euler(0f, 0f, 0f));
+        Instantiate(damagedPSPrefab, transform.position + Vector3.up * 2, Quaternion.Euler(0f, 0f, 0f));
         if (hp < 0)
         {
             hp = 0;
